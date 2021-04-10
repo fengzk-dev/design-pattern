@@ -63,7 +63,6 @@ func Pi(n int) float64 {
 func main() {
 	f := wrapcache(Pi, &sync.Map{})
 	g := wraplogger(f, log.New(os.Stdout, "test ", 1))
-<<<<<<< HEAD
 	g(100000)
 	g(1000)
 	g(100000)
