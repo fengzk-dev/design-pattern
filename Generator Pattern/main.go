@@ -27,7 +27,6 @@ type (
 	}
 
 	eventSubject struct {
-	Observers sync.Map
 	observers sync.Map
 }
 )
@@ -37,15 +36,15 @@ func (e *eventObserver) NotifyCallback(event Event) {
 }
 
 func (s *eventSubject) AddListener(obs Observer) {
-	s.Observers.Store(obs, struct{}{})
+	s.observers.Store(obs, struct{}{})
 }
 
 func (s *eventSubject) removeListener(obs Observer) {
-	s.Observers.Delete(obs)
+	s.observers.Delete(obs)
 }
 
 func (s *eventSubject) Nofity(event Event) {
-	s.Observers.Range(func(key interface{}, value interface{}) bool {
+	s.observers.Range(func(key interface{}, value interface{}) bool {
 		if key == nil || value == nil {
 			return false
 		}
