@@ -27,8 +27,8 @@ type (
 	}
 
 	eventSubject struct {
-	observers sync.Map
-}
+		observers sync.Map
+	}
 )
 
 func (e *eventObserver) NotifyCallback(event Event) {
@@ -39,7 +39,7 @@ func (s *eventSubject) AddListener(obs Observer) {
 	s.observers.Store(obs, struct{}{})
 }
 
-func (s *eventSubject) removeListener(obs Observer) {
+func (s *eventSubject) RemoveListener(obs Observer) {
 	s.observers.Delete(obs)
 }
 
